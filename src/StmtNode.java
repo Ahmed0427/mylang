@@ -1,0 +1,4 @@
+interface StmtNode {
+    void evaluate(); 
+}
+

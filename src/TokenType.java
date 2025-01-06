@@ -1,0 +1,33 @@
+public enum TokenType {
+    LEFT_PAREN, RIGHT_PAREN,
+    LEFT_BRACE, RIGHT_BRACE,
+
+    COMMA, DOT, SEMICOLON,
+    SLASH, STAR, MINUS, PLUS,
+
+    COLON, QUESTION,
+
+    BANG,
+    BANG_EQUAL,
+
+    EQUAL,
+    EQUAL_EQUAL,
+
+    GREATER, GREATER_EQUAL,
+    LESS, LESS_EQUAL,
+
+    IDENTIFIER, STRING, NUMBER,
+
+    FALSE, TRUE,
+    IF, ELSE, WHILE, FOR,
+    OR, AND,
+    CLASS, SUPER, THIS,
+    FUN,
+    NONE, 
+    PRINT,
+    RETURN,
+    LET, CONST,
+
+    EOF
+}
+

@@ -1,0 +1,6 @@
+let global = "outside";
+
+{
+    let local = "inside";
+    print global + local;
+}

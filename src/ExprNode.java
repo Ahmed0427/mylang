@@ -1,0 +1,3 @@
+interface ExprNode {
+    Object evaluate();
+}

@@ -1,0 +1,16 @@
+// testing scopes
+
+{
+    let x = "outer";
+    {
+        let x = "inner";
+        print x;  
+    }
+    print x;     
+}
+
+/* 
+    Output should be
+    inner
+    outer
+*/
