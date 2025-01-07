@@ -8,9 +8,7 @@ class Scope {
     final Scope parentScope;
 
     Scope() {
-        this.parentScope = null;
-        this.varsMap = new HashMap<>();
-        this.isConstMap = new HashMap<>();
+        this(null);
     }
 
     Scope(Scope scope) {
