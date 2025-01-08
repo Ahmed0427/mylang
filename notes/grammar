@@ -1,0 +1,39 @@
+program -> declaration* EOF
+
+declaration -> variable | statement
+
+variable -> ("let" | "const") IDENTIFIER ("=" expression)? ";" 
+
+statement -> exprStmt | printStmt | block | ifStmt
+
+ifStmt -> "if" "(" expression ")" statement
+          ("else" "if" "(" expression ")" statement)*
+          ("else" statement)?
+
+block -> "{" declaretion* "}"
+
+exprStmt -> expression ";"
+
+printStmt -> "print" expression ";"
+
+expression -> assignment
+
+assignment -> IDENTIFIER "=" assignment | ternary
+
+ternary -> logicOr ("?" ternary ":" ternary)? 
+
+logicOr -> logicAnd ("or" logicAnd)*
+
+logicAnd -> equality ("and" equality)*
+
+equality -> comparison (("!=" | "==") comparison)*       
+
+comparisona -> term ((">" | ">=" | "<" | "<=") term)* 
+
+term -> factor (("+", "-") factor)*
+
+factor -> unary (("*" | "/") unary)* 
+
+unary -> ("-" | "!") unary | primary
+
+primary -> NUMBER | STRING | IDENTIFIER | "true" | "false" | "none" | "(" expression ")"     
