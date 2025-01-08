@@ -8,10 +8,9 @@ and automatic memory management.
 
 - variable declarations with `let` and `const`
 - Basic data types: numbers, strings, booleans, and `none` for nothing
-- Block-level scoping
+- Control flow if's and loops
 - Built-in print statement
-- Comprehensive error handling, or i like to think so
-- BTW this lang isn't for use it is for me to learn how these stuff work
+- good enough error handling
 
 ## Project Structure and Components
 ```
@@ -23,8 +22,8 @@ and automatic memory management.
 │   ├── Tokenizer.java     # Converts text into tokens 
 │   ├── Parser.java        # Converts tokens into AST
 │   ├── Scope/             # Variables Map and the Parent Scope
-│   ├── ExprNode/          # defines evaluate function that every Expr must implements
-│   ├── ExprStmt/          # defines evaluate function that every Stmt must implements
+│   ├── ExprNode/          # An interface defines evaluate function it is for *Node
+│   ├── StmtNode/          # An interface defines evaluate function it is for *Stmt
 │   ├── *Node/             # AST nodes that implements ExprNode
 │   ├── *Stmt/             # AST nodes that implements StmtNode
 │   └── ...               
@@ -96,6 +95,15 @@ else if (x == 5 or y == 0) {
 }
 else {
     print "only in Ohio";
+}
+
+let i = 0;
+
+while (i < 10) {
+    if (i % 2) {
+        print "x = " + i;
+    }
+    i = i + 1;
 }
 ```
 

@@ -62,7 +62,28 @@ public class Parser {
         if (match(TokenType.PRINT)) return printStmt(); 
         if (match(TokenType.LEFT_BRACE)) return block(); 
         if (match(TokenType.IF)) return ifStmt(); 
+        if (match(TokenType.WHILE)) return whileStmt(); 
         return exprStmt();
+    }
+
+    StmtNode whileStmt() {
+        advance();
+
+        if (!match(TokenType.LEFT_PAREN)) {
+            throw error(peek(), "Expect '(' after if.");
+        }
+        advance();
+
+        ExprNode condition = expression();
+
+        if (!match(TokenType.RIGHT_PAREN)) {
+            throw error(peek(), "Expect ')' after condition.");
+        }
+        advance();
+
+        StmtNode body = statement();
+
+        return new WhileStmt(condition, body);
     }
 
     StmtNode ifStmt() {
@@ -257,7 +278,7 @@ public class Parser {
 
     ExprNode factor() {
         ExprNode expr = unary();
-        while(match(TokenType.SLASH, TokenType.STAR)) {
+        while(match(TokenType.SLASH, TokenType.STAR, TokenType.MOD)) {
             Token operator = advance();  
             ExprNode right = unary();
 

@@ -4,7 +4,9 @@ declaration -> variable | statement
 
 variable -> ("let" | "const") IDENTIFIER ("=" expression)? ";" 
 
-statement -> exprStmt | printStmt | block | ifStmt
+statement -> exprStmt | printStmt | block | ifStmt | whileStmt
+
+whileStmt -> while "(" expression ")" statement
 
 ifStmt -> "if" "(" expression ")" statement
           ("else" "if" "(" expression ")" statement)*
@@ -36,4 +38,5 @@ factor -> unary (("*" | "/") unary)*
 
 unary -> ("-" | "!") unary | primary
 
-primary -> NUMBER | STRING | IDENTIFIER | "true" | "false" | "none" | "(" expression ")"     
+primary -> NUMBER | STRING | IDENTIFIER | "true" | "false" |
+           "none" | "(" expression ")"     

@@ -9,7 +9,7 @@ class AssignNode implements ExprNode {
 
     public Object evaluate() {
         Main.scope.update(name, value.evaluate());
-        return Main.scope.varsMap.get(name.lexeme);
+        return Main.scope.get(name);
     }
 
 }

@@ -8,7 +8,7 @@ class BlockStmt implements StmtNode {
     }
 
     public void evaluate() {
-        Scope prevScope = Main.scope;
+        Scope parentScope = Main.scope;
 
         try {
             Main.scope = new Scope(Main.scope);
@@ -18,7 +18,7 @@ class BlockStmt implements StmtNode {
             }
         }
         finally {
-            Main.scope = prevScope;
+            Main.scope = parentScope;
         } 
     }
 }

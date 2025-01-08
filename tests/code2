@@ -1,13 +1,8 @@
-let x = 0;
-let y = 0;
+let i = 0;
 
-if (x < 5 and y > 10) {
-    print "x < 5 and y > 10";
-}
-else if (x == 5 or y == 0) {
-    if (x == 5) print "x == 5";
-    else print "y == 0";
-}
-else {
-    print "only in Ohio";
+while (i < 10) {
+    if (i % 2) {
+        print "x = " + i;
+    }
+    i = i + 1;
 }

@@ -3,7 +3,8 @@ public enum TokenType {
     LEFT_BRACE, RIGHT_BRACE,
 
     COMMA, DOT, SEMICOLON,
-    SLASH, STAR, MINUS, PLUS,
+    SLASH, STAR, MOD,
+    MINUS, PLUS,
 
     COLON, QUESTION,
 

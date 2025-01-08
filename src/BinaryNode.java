@@ -55,6 +55,16 @@ class BinaryNode implements ExprNode {
 
                 return (double)objL / (double)objR; 
 
+            case MOD:
+
+                numberOperands(operator, objL, objR);
+                
+                if ((double)objR == 0.0) {
+                    throw new EvaluationException(operator,
+                    "Zero division error."); 
+                }
+
+                return (double)objL % (double)objR; 
 
             case GREATER:
 

@@ -2,8 +2,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 class Scope {
-    Map<String, Object> varsMap;
-    Map<String, Boolean> isConstMap;
+    final Map<String, Object> varsMap;
+    final Map<String, Boolean> isConstMap;
 
     final Scope parentScope;
 
@@ -11,17 +11,17 @@ class Scope {
         this(null);
     }
 
-    Scope(Scope scope) {
-        this.parentScope = scope;
+    Scope(Scope parentScope) {
         this.varsMap = new HashMap<>();
         this.isConstMap = new HashMap<>();
+        this.parentScope = parentScope;
     }
 
     void update(Token name, Object value) {
         if (!varsMap.containsKey(name.lexeme)) {
-
             if (parentScope != null) {
                 parentScope.update(name, value);
+                return;
             }
             
             throw new EvaluationException(name,
@@ -29,7 +29,7 @@ class Scope {
         }
 
         if (isConstMap.get(name.lexeme)) {
-            throw new EvaluationException(name, "Assignment to constant variable."); 
+            throw new EvaluationException(name, "Reassignment to constant variable."); 
         }
 
         varsMap.put(name.lexeme, value);
@@ -47,7 +47,7 @@ class Scope {
         }
 
         if (varsMap.get(name.lexeme) == null) {
-            throw new EvaluationException(name, "accessing to uninitialized variable."); 
+            throw new EvaluationException(name, "accessing to a variable with no value."); 
         }
 
         return varsMap.get(name.lexeme);

@@ -64,6 +64,9 @@ class Tokenizer {
         else if (c == '*') {
             addToken(TokenType.STAR);
         }
+        else if (c == '%') {
+            addToken(TokenType.MOD);
+        }
         else if (c == '!') {
             addToken(match('=') ? TokenType.BANG_EQUAL : TokenType.BANG);
         }
