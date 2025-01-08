@@ -1,16 +1,21 @@
-// testing scopes
+let x = 10;
+let y = 10;
 
-{
-    let x = "outer";
-    {
-        let x = "inner";
-        print x;  
+if (x > 5) {
+    if (y < 10) {
+        print "x > 5 and y < 10";
     }
-    print x;     
+    else {
+        print "x > 5 and y >= 10";
+    }
+}
+else {
+    print "x <= 5";
 }
 
-/* 
-    Output should be
-    inner
-    outer
-*/
+if (x >= 10) {
+    print (y > 5 ? "y is greater than 5" : "y is not greater than 5");
+}
+else {
+    print "x is not greater than 10";
+}

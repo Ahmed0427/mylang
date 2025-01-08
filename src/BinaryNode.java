@@ -82,6 +82,9 @@ class BinaryNode implements ExprNode {
 
             case EQUAL_EQUAL: return isEqual(objL, objR);
             case BANG_EQUAL: return !isEqual(objL, objR);  
+
+            case OR: return Util.isTruthy(objL) || Util.isTruthy(objR);
+            case AND: return Util.isTruthy(objL) && Util.isTruthy(objR);
         }
 
         return null;

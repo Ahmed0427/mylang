@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.AbstractMap;
 
 public class Parser {
     private final List<Token> tokens;
@@ -60,7 +61,53 @@ public class Parser {
     StmtNode statement() {
         if (match(TokenType.PRINT)) return printStmt(); 
         if (match(TokenType.LEFT_BRACE)) return block(); 
+        if (match(TokenType.IF)) return ifStmt(); 
         return exprStmt();
+    }
+
+    StmtNode ifStmt() {
+        advance();
+
+        if (!match(TokenType.LEFT_PAREN)) {
+            throw error(peek(), "Expect '(' after if.");
+        }
+        advance();
+
+        ExprNode ifCondition = expression();
+        if (!match(TokenType.RIGHT_PAREN)) {
+            throw error(peek(), "Expect ')' after condition.");
+        }
+        advance();
+
+        StmtNode ifBranch = statement();
+        var elseIfs = new ArrayList<AbstractMap.SimpleEntry<ExprNode, StmtNode>>();
+        StmtNode elseBranch = null;
+        while (match(TokenType.ELSE)) {
+            advance();
+            if (match(TokenType.IF)) {
+                advance();
+
+                if (!match(TokenType.LEFT_PAREN)) {
+                    throw error(peek(), "Expect '(' after else if.");
+                }
+                advance();
+
+                ExprNode elseIfCondition = expression();
+                if (!match(TokenType.RIGHT_PAREN)) {
+                    throw error(peek(), "Expect ')' after condition.");
+                }
+                advance();
+
+                StmtNode elseIfBranch = statement();
+                elseIfs.add(new AbstractMap.SimpleEntry<>(elseIfCondition, elseIfBranch));
+            }
+            else {
+                elseBranch = statement();
+                break;
+            }
+        }
+
+        return new IfStmt(ifCondition, ifBranch, elseIfs, elseBranch);
     }
 
     StmtNode block() {
@@ -128,7 +175,7 @@ public class Parser {
     }
 
     ExprNode ternary() {
-        ExprNode condition = equality();
+        ExprNode condition = logicOr();
         if (match(TokenType.QUESTION)) {
             advance();
             ExprNode truePart = ternary();
@@ -144,6 +191,30 @@ public class Parser {
         else {
             return condition;
         }
+    }
+
+    ExprNode logicOr() {
+        ExprNode expr = logicAnd();
+        while(match(TokenType.OR)) {
+            Token operator = advance();  
+            ExprNode right = logicAnd();
+
+            expr = new BinaryNode(expr, operator, right);
+        }
+
+        return expr;
+    }
+
+    ExprNode logicAnd() {
+        ExprNode expr = equality();
+        while(match(TokenType.AND)) {
+            Token operator = advance();  
+            ExprNode right = equality();
+
+            expr = new BinaryNode(expr, operator, right);
+        }
+
+        return expr;
     }
 
     ExprNode equality() {

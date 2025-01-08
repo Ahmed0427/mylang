@@ -11,7 +11,7 @@ and automatic memory management.
 - Block-level scoping
 - Built-in print statement
 - Comprehensive error handling, or i like to think so
-- BTW boolean operators not yet added i don't know why
+- BTW this lang isn't for use it is for me to learn how these stuff work
 
 ## Project Structure and Components
 ```
@@ -82,14 +82,20 @@ let name = "Hello " + "World";
 
 let isTrue = 10 > 5;
 
-// Blocks and scope
-{
-    let x = "outer";
-    {
-        let x = "inner";
-        print x;  // Prints: inner
-    }
-    print x;      // Prints: outer
+// if statments 
+
+let x = 0;
+let y = 0;
+
+if (x < 5 and y > 10) {
+    print "x < 5 and y > 10";
+}
+else if (x == 5 or y == 0) {
+    if (x == 5) print "x == 5";
+    else print "y == 0";
+}
+else {
+    print "only in Ohio";
 }
 ```
 
