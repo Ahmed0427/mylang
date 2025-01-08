@@ -6,7 +6,10 @@ variable -> ("let" | "const") IDENTIFIER ("=" expression)? ";"
 
 statement -> exprStmt | printStmt | block | ifStmt | whileStmt
 
-whileStmt -> while "(" expression ")" statement
+forStmt -> "for" "(" (variable | exprStmt | ";")
+           expression? ";" expression? ")" statement
+
+whileStmt -> "while" "(" expression ")" statement
 
 ifStmt -> "if" "(" expression ")" statement
           ("else" "if" "(" expression ")" statement)*

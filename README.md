@@ -107,6 +107,18 @@ while (i < 10) {
     }
     i = i + 1;
 }
+
+// program to print the first 21 elements in the Fibonacci sequence
+
+let previous;
+let current = 0;
+
+for (let next = 1; current < 10000; next = previous + next) {
+  print current;
+  previous = current;
+  current = next;
+}
+
 ```
 
 ## Development

@@ -1,6 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 import java.util.AbstractMap;
+import java.util.Arrays;
 
 public class Parser {
     private final List<Token> tokens;
@@ -63,7 +64,57 @@ public class Parser {
         if (match(TokenType.LEFT_BRACE)) return block(); 
         if (match(TokenType.IF)) return ifStmt(); 
         if (match(TokenType.WHILE)) return whileStmt(); 
+        if (match(TokenType.FOR)) return forStmt(); 
         return exprStmt();
+    }
+
+    StmtNode forStmt() {
+        advance();
+
+        if (!match(TokenType.LEFT_PAREN)) {
+            throw error(peek(), "Expect '(' after if.");
+        }
+        advance();
+
+        StmtNode init; 
+        if (match(TokenType.LET, TokenType.CONST)) init = variable();
+        else if (match(TokenType.SEMICOLON)) {
+            init = null; advance();
+        } 
+        else init = exprStmt();
+
+        ExprNode condition = null;
+        if (!match(TokenType.SEMICOLON)) {
+            condition = expression();
+            if (!match(TokenType.SEMICOLON)) {
+                throw error(peek(), "Expect ';' after for condition.");
+            }
+        }
+        advance();
+
+        ExprNode updateExpr = null;
+        if (!match(TokenType.RIGHT_PAREN)) {
+            updateExpr = expression();
+            if (!match(TokenType.RIGHT_PAREN)) {
+                throw error(peek(), "Expect ')' after for clauses.");
+            }
+        }
+        advance();
+
+        StmtNode body = statement();
+
+        if (updateExpr != null) {
+            body = new BlockStmt(Arrays.asList(
+                body,
+                new ExprStmt(updateExpr) 
+            ));
+        }
+
+        if (condition == null) condition = new LiteralNode(true);
+        body = new WhileStmt(condition, body);
+
+        if (init != null) body = new BlockStmt(Arrays.asList(init, body));
+        return body; 
     }
 
     StmtNode whileStmt() {
