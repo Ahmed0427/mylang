@@ -9,6 +9,7 @@ and automatic memory management.
 - variable declarations with `let` and `const`
 - Basic data types: numbers, strings, booleans, and `none` for nothing
 - Control flow if's and loops
+- you can define functions
 - Built-in print statement
 - good enough error handling
 
@@ -26,6 +27,8 @@ and automatic memory management.
 │   ├── StmtNode/          # An interface defines evaluate function it is for *Stmt
 │   ├── *Node/             # AST nodes that implements ExprNode
 │   ├── *Stmt/             # AST nodes that implements StmtNode
+│   ├── MyCallable/        # interface for stuff that can be called like functions
+│   ├── MyFunction/        # implements MyCallable interface
 │   └── ...               
 ├── tests/                 # Test files
 │   └── ...                # Test programs
@@ -35,9 +38,8 @@ and automatic memory management.
 ## Getting Started
 
 ### Prerequisites
-- Linux or if you use Windows try (WSL) 
 - Java Development Kit (JDK) 8 or higher
-- Make (for building)
+- Makefile (for building)
 
 ### Building the Project
 Clone the repository and build using Make:
@@ -118,6 +120,24 @@ for (let next = 1; current < 10000; next = previous + next) {
   previous = current;
   current = next;
 }
+
+// trying functions
+
+fun greetTime(first, last, time) {
+  if (time < 12) {
+    print "Good morning, " + first + " " + last + "!";
+  }
+  else if (time < 18) {
+    print "Good afternoon, " + first + " " + last + "!";
+  }
+  else {
+    print "Good evening, " + first + " " + last + "!";
+  }
+}
+
+greetTime("Alice", "Smith", 9);    // Prints "Good morning, Alice Smith!"
+greetTime("Charlie", "Brown", 20); // Prints "Good evening, Charlie Brown!"
+greetTime("Bob", "Jones", 15);     // Prints "Good afternoon, Bob Jones!"
 
 ```
 

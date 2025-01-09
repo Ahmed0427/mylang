@@ -24,12 +24,73 @@ public class Parser {
     StmtNode declaration() {
         try {
             if (match(TokenType.LET, TokenType.CONST)) return variable();
+            if (match(TokenType.FUN)) return funDecl();
             return statement();
         } 
         catch (RuntimeException  ex) {
             findNextStatement();
             return null;
         }
+    }
+
+    StmtNode funDecl() {
+        advance();
+        return function("function");
+    }
+
+    StmtNode function(String kind) {
+        if (!match(TokenType.IDENTIFIER)) {
+            throw error(peek(), "Expect " + kind + " name.");
+        }
+
+        Token name = advance();
+
+        if (!match(TokenType.LEFT_PAREN)) {
+            throw error(peek(), "Expect ( " + kind + " name.");
+        }
+        advance();
+
+        List<Token> params = new ArrayList<>();
+        if (!match(TokenType.RIGHT_PAREN)) {
+            params = parameters();
+        }
+
+        if (!match(TokenType.RIGHT_PAREN)) {
+            throw error(peek(), "Expect ) after parameters");
+        }
+        advance();
+
+        if (!match(TokenType.LEFT_BRACE)) {
+            throw error(peek(), "Expect { after " + kind + " parameters");
+        }
+
+        StmtNode body = block();
+
+        return new FunDeclStmt(name, params, body);
+
+    }
+
+    List<Token> parameters() {
+        List<Token> params = new ArrayList<>();
+
+        do {
+            if (params.size() >= 255) {
+                error(peek(), "Can't have more than 255 parameters.");
+            }
+
+            if (match(TokenType.COMMA)) {
+                advance();
+            }
+
+            if (!match(TokenType.IDENTIFIER)) {
+                throw error(peek(), "Expect a parameter name");
+            }
+
+            params.add(advance());
+        }
+        while (match(TokenType.COMMA));
+
+        return params;
     }
 
     StmtNode variable() {
@@ -347,8 +408,39 @@ public class Parser {
             return new UnaryNode(operator, right);
         }
         else {
-            return primary();
+            return call();
         }
+    }
+
+    ExprNode call() {
+        ExprNode expr = primary();
+        while (match(TokenType.LEFT_PAREN)) {
+            advance();
+            List<ExprNode> argsList = args();
+            if (!match(TokenType.RIGHT_PAREN)) {
+                throw error(peek(), "Expect ')' after call.");
+            }
+            expr = new CallExpr(expr, advance(), argsList);
+        }
+        return expr;
+    }
+
+    List<ExprNode> args() {
+        List<ExprNode> argsList = new ArrayList<>();
+        if (match(TokenType.RIGHT_PAREN)) {
+            return argsList;
+        }
+        while (true) {
+            argsList.add(expression());
+            if (argsList.size() >= 255) {
+                error(peek(), "Can't have more than 255 arguments.");
+            }
+            if (!match(TokenType.COMMA)) {
+                break;
+            }
+            advance();
+        }
+        return argsList;
     }
     
     ExprNode primary() {

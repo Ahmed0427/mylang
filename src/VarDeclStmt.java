@@ -10,7 +10,7 @@ class VarDeclStmt implements StmtNode {
     }
 
     public void evaluate() {
-        if (Main.scope.varsMap.containsKey(name.lexeme)) {
+        if (Main.scope.namesMap.containsKey(name.lexeme)) {
             String msg = String.format("'%s' has already been defined", name.lexeme);
             throw new EvaluationException(name, msg); 
         }
@@ -21,7 +21,7 @@ class VarDeclStmt implements StmtNode {
             value = expr.evaluate();
         }
 
-        Main.scope.varsMap.put(name.lexeme, value);
+        Main.scope.namesMap.put(name.lexeme, value);
 
         boolean isConst = (declType == TokenType.CONST); 
 

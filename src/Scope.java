@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 class Scope {
-    final Map<String, Object> varsMap;
+    final Map<String, Object> namesMap;
     final Map<String, Boolean> isConstMap;
 
     final Scope parentScope;
@@ -12,13 +12,13 @@ class Scope {
     }
 
     Scope(Scope parentScope) {
-        this.varsMap = new HashMap<>();
+        this.namesMap = new HashMap<>();
         this.isConstMap = new HashMap<>();
         this.parentScope = parentScope;
     }
 
     void update(Token name, Object value) {
-        if (!varsMap.containsKey(name.lexeme)) {
+        if (!namesMap.containsKey(name.lexeme)) {
             if (parentScope != null) {
                 parentScope.update(name, value);
                 return;
@@ -32,11 +32,11 @@ class Scope {
             throw new EvaluationException(name, "Reassignment to constant variable."); 
         }
 
-        varsMap.put(name.lexeme, value);
+        namesMap.put(name.lexeme, value);
     }
 
     Object get(Token name) {
-        if (!varsMap.containsKey(name.lexeme)) {
+        if (!namesMap.containsKey(name.lexeme)) {
 
             if (parentScope != null) {
                 return parentScope.get(name);
@@ -46,10 +46,10 @@ class Scope {
                 "Undefined variable '" + name.lexeme + "'.");
         }
 
-        if (varsMap.get(name.lexeme) == null) {
+        if (namesMap.get(name.lexeme) == null) {
             throw new EvaluationException(name, "accessing to a variable with no value."); 
         }
 
-        return varsMap.get(name.lexeme);
+        return namesMap.get(name.lexeme);
     }
 }

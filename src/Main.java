@@ -16,6 +16,7 @@ public class Main {
     static boolean isThereRuntimeError = false;
     
     static Scope scope = new Scope();
+    final static Scope global = scope;
 
     public static void main(String[] args) throws IOException {
         if (args.length == 0) {
@@ -79,6 +80,7 @@ public class Main {
         if (isThereError) return;
 
         try {
+            addNativeFunctions();
             for(StmtNode stmt : statements) {
                 stmt.evaluate();
             }
@@ -86,6 +88,25 @@ public class Main {
         catch(EvaluationException ex) {
             reportEvaluationError(ex);
         }
+    }
+
+    private static void addNativeFunctions() {
+        global.namesMap.put("clock", new MyCallable() {
+            @Override
+            public int parametersCount() {
+                return 0;
+            }
+
+            @Override
+            public Object call(List<Object> arguments) {
+                return (double)System.currentTimeMillis() / 1000.0;
+            }
+
+            @Override
+            public String toString() {
+                return "<native fn>";
+            }
+        });
     }
 
     static void reportError(int line, String message) {

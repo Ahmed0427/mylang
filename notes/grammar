@@ -1,6 +1,12 @@
 program -> declaration* EOF
 
-declaration -> variable | statement
+declaration -> variable | funDecl | statement
+
+funDecl -> "fun" function ;
+
+function -> IDENTIFIER "(" parameters? ")" block ;
+
+parameters -> IDENTIFIER ( "," IDENTIFIER )* ;
 
 variable -> ("let" | "const") IDENTIFIER ("=" expression)? ";" 
 
@@ -35,11 +41,15 @@ equality -> comparison (("!=" | "==") comparison)*
 
 comparisona -> term ((">" | ">=" | "<" | "<=") term)* 
 
-term -> factor (("+", "-") factor)*
+term -> factor (("+" | "-") factor)*
 
 factor -> unary (("*" | "/") unary)* 
 
-unary -> ("-" | "!") unary | primary
+unary -> ("-" | "!") unary | call
+
+call -> primary ( "(" args? ")" )*
+
+args -> expression ( "," expression )*
 
 primary -> NUMBER | STRING | IDENTIFIER | "true" | "false" |
            "none" | "(" expression ")"     
