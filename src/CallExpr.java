@@ -2,18 +2,18 @@ import java.util.List;
 import java.util.ArrayList;
 
 class CallExpr implements ExprNode {
-    final ExprNode callee;
+    final ExprNode calleeExpr;
     final Token closingParen;
     final List<ExprNode> args;
 
-    CallExpr(ExprNode callee, Token closingParen, List<ExprNode> args) {
-        this.callee = callee;
+    CallExpr(ExprNode calleeExpr, Token closingParen, List<ExprNode> args) {
+        this.calleeExpr = calleeExpr;
         this.closingParen = closingParen;
         this.args = args;
     }
 
     public Object evaluate() {
-        Object calleeName = callee.evaluate(); 
+        Object functionObj = calleeExpr.evaluate(); 
 
         List<Object> arguments = new ArrayList<>();
 
@@ -21,13 +21,13 @@ class CallExpr implements ExprNode {
             arguments.add(argument.evaluate());
         }
 
-        if (!(calleeName instanceof MyCallable)) {
+        if (!(functionObj instanceof MyCallable)) {
             throw new EvaluationException(closingParen,
             "Can only call functions and classes.");
 
         }
 
-        MyCallable function = (MyCallable)calleeName;
+        MyCallable function = (MyCallable)functionObj;
 
         if (args.size() != function.parametersCount()) {
             throw new EvaluationException(closingParen, "Expected " +

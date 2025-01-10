@@ -1,32 +1,16 @@
-let age = 25;
-const PI = 3.14159;
-
-let sum = 10 + 5;
-let diff = 10 - 5;
-let prod = 10 * 5;
-let quot = 10 / 5;
-
-// print actually prints a line
-
-print sum;     
-print diff;     
-print prod;     
-print quot;     
-
-let name = "Hello " + "World";
-
-print name;     
-
-let isTrue = true == false;
-let isFalse = !true;
-
-print isTrue;     
-print isFalse;     
-
-let volume = 33;
-
-{
-    let volume = 3 * 4 * 5;
-    print volume;
+fun outerFunction(outerVariable) {
+    // Outer function variable
+    print "Outer function: " + outerVariable;
+    
+    // Nested (inner) function
+    fun innerFunction(innerVariable) {
+        print "Inner function: " + innerVariable;
+        print "Accessing outer variable from inner function:" + outerVariable;
+    }
+    
+    // Calling the inner function from the outer function
+    innerFunction("Hello from the inner function!");
 }
 
+// Calling the outer function
+outerFunction("Hello from the outer function!");

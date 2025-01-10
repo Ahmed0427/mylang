@@ -11,14 +11,15 @@ class MyFunction implements MyCallable {
     }
 
     public Object call(List<Object> args) {
-        Scope scope = new Scope(Main.global);
+        Scope parentScope = Main.scope;
+        Scope scope = new Scope(Main.scope);
         for (int i = 0; i < funDecl.parameters.size(); i++) {
             scope.namesMap.put(funDecl.parameters.get(i).lexeme, args.get(i));
         }
 
         Main.scope = scope;
         funDecl.body.evaluate();
-        Main.scope = Main.global;
+        Main.scope = parentScope;
 
         return null;
     }

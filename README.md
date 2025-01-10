@@ -139,6 +139,25 @@ greetTime("Alice", "Smith", 9);    // Prints "Good morning, Alice Smith!"
 greetTime("Charlie", "Brown", 20); // Prints "Good evening, Charlie Brown!"
 greetTime("Bob", "Jones", 15);     // Prints "Good afternoon, Bob Jones!"
 
+// nested functions
+
+fun outerFunction(outerVariable) {
+    // Outer function variable
+    print "Outer function: " + outerVariable;
+    
+    // Nested (inner) function
+    fun innerFunction(innerVariable) {
+        print "Inner function: " + innerVariable;
+        print "Accessing outer variable from inner function:" + outerVariable;
+    }
+    
+    // Calling the inner function from the outer function
+    innerFunction("Hello from the inner function!");
+}
+
+// Calling the outer function
+outerFunction("Hello from the outer function!");
+
 ```
 
 ## Development

@@ -12,8 +12,12 @@ class FunDeclStmt implements StmtNode {
     }
 
     public void evaluate() {
+        if (Main.scope.namesMap.containsKey(name.lexeme)) {
+            String msg = String.format("'%s' has already been defined", name.lexeme);
+            throw new EvaluationException(name, msg); 
+        }
+
         MyFunction function = new MyFunction(this);
         Main.scope.namesMap.put(name.lexeme, function);
     }
 }
-
