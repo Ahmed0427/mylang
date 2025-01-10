@@ -1,8 +1,0 @@
-let previous;
-let current = 0;
-
-for (let next = 1; current < 10000; next = previous + next) {
-  print current;
-  previous = current;
-  current = next;
-}

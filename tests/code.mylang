@@ -14,3 +14,4 @@ fun outerFunction(outerVariable) {
 
 // Calling the outer function
 outerFunction("Hello from the outer function!");
+
