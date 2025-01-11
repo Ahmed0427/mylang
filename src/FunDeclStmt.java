@@ -19,5 +19,6 @@ class FunDeclStmt implements StmtNode {
 
         MyFunction function = new MyFunction(this);
         Main.scope.namesMap.put(name.lexeme, function);
+        Main.scope.isConstMap.put(name.lexeme, false);
     }
 }

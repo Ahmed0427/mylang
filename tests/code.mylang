@@ -5,7 +5,7 @@ fun outerFunction(outerVariable) {
     // Nested (inner) function
     fun innerFunction(innerVariable) {
         print "Inner function: " + innerVariable;
-        print "Accessing outer variable from inner function:" + outerVariable;
+        print "Accessing outer variable from inner function: " + outerVariable;
     }
     
     // Calling the inner function from the outer function
@@ -15,3 +15,6 @@ fun outerFunction(outerVariable) {
 // Calling the outer function
 outerFunction("Hello from the outer function!");
 
+outerFunction = "hello";
+
+print outerFunction;
