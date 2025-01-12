@@ -25,8 +25,10 @@ class BinaryNode implements ExprNode {
                 }
                 
                 if (objL instanceof String || objR instanceof String) {
-                    return Util.convertToString(objL) + 
-                    Util.convertToString(objR);
+                    if (objL instanceof Double || objR instanceof Double) {
+                        return Util.convertToString(objL) + 
+                        Util.convertToString(objR);
+                    }
                 }
                 
                 throw new EvaluationException(operator,

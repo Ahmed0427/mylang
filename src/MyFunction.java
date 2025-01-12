@@ -16,15 +16,22 @@ class MyFunction implements MyCallable {
         for (int i = 0; i < funDecl.parameters.size(); i++) {
             scope.namesMap.put(funDecl.parameters.get(i).lexeme, args.get(i));
         }
-
-        Main.scope = scope;
-        funDecl.body.evaluate();
-        Main.scope = parentScope;
+        
+        try {
+            Main.scope = scope;
+            funDecl.body.evaluate();
+        }
+        catch (ReturnVal val) {
+            return val.value;
+        }
+        finally {
+            Main.scope = parentScope;
+        }
 
         return null;
     }
 
     public String toString() {
-        return "<fn " + funDecl.name.lexeme + ">";
+        return "<Function: " + funDecl.name.lexeme + ">";
     }
 }

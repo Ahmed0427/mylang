@@ -1,8 +1,7 @@
 # lightweight Scripting Language Interpreter
-A lightweight, expressive scripting language interpreter written in Java.
-This project implements a dynamically-typed language with modern syntax
-features including lexical scoping, first-class functions,
-and automatic memory management.
+A lightweight, scripting language interpreter written in Java.
+This project implements a dynamically-typed language
+with modern syntax features
 
 ## Features
 
@@ -121,53 +120,30 @@ for (let next = 1; current < 10000; next = previous + next) {
   current = next;
 }
 
-// trying functions
+// trying functions and return statement
 
-fun greetTime(first, last, time) {
-  if (time < 12) {
-    print "Good morning, " + first + " " + last + "!";
+fun factorial(n) {
+
+  if (n == 0) {
+    return 1;
   }
-  else if (time < 18) {
-    print "Good afternoon, " + first + " " + last + "!";
-  }
-  else {
-    print "Good evening, " + first + " " + last + "!";
-  }
+
+  return n * factorial(n - 1);
 }
 
-greetTime("Alice", "Smith", 9);    // Prints "Good morning, Alice Smith!"
-greetTime("Charlie", "Brown", 20); // Prints "Good evening, Charlie Brown!"
-greetTime("Bob", "Jones", 15);     // Prints "Good afternoon, Bob Jones!"
-
-// nested functions
-
-fun outerFunction(outerVariable) {
-    // Outer function variable
-    print "Outer function: " + outerVariable;
-    
-    // Nested (inner) function
-    fun innerFunction(innerVariable) {
-        print "Inner function: " + innerVariable;
-        print "Accessing outer variable from inner function:" + outerVariable;
-    }
-    
-    // Calling the inner function from the outer function
-    innerFunction("Hello from the inner function!");
-}
-
-// Calling the outer function
-outerFunction("Hello from the outer function!");
+print factorial(5);  // Output: 120
 
 ```
 
 ## Development
 
 ### Adding New Features
-1. Add relevant token types in `TokenType.java`
-2. Implement new AST nodes if needed
-3. Update the parser to handle new syntax
-4. Add evaluation logic
-5. Add tests in the `tests/` directory
+1. Add the new grammar
+2. Add relevant token types in `TokenType.java`
+3. Implement new AST nodes if needed
+4. Update the parser to handle new syntax
+5. Add evaluation logic
+6. Add tests in the `tests/` directory
 
 ## Testing
 Test programs are in `tests/` directory and run using:

@@ -1,20 +1,10 @@
-fun outerFunction(outerVariable) {
-    // Outer function variable
-    print "Outer function: " + outerVariable;
-    
-    // Nested (inner) function
-    fun innerFunction(innerVariable) {
-        print "Inner function: " + innerVariable;
-        print "Accessing outer variable from inner function: " + outerVariable;
-    }
-    
-    // Calling the inner function from the outer function
-    innerFunction("Hello from the inner function!");
+fun factorial(n) {
+
+  if (n == 0) {
+    return 1;
+  }
+
+  return n * factorial(n - 1);
 }
 
-// Calling the outer function
-outerFunction("Hello from the outer function!");
-
-outerFunction = "hello";
-
-print outerFunction;
+print factorial(5);  // Output: 120

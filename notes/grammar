@@ -10,7 +10,9 @@ parameters -> IDENTIFIER ( "," IDENTIFIER )* ;
 
 variable -> ("let" | "const") IDENTIFIER ("=" expression)? ";" 
 
-statement -> exprStmt | printStmt | block | ifStmt | whileStmt
+statement -> exprStmt | printStmt | block | ifStmt | whileStmt | returnStmt
+
+returnStmt -> "return" expression? ";"
 
 forStmt -> "for" "(" (variable | exprStmt | ";")
            expression? ";" expression? ")" statement
@@ -43,7 +45,7 @@ comparisona -> term ((">" | ">=" | "<" | "<=") term)*
 
 term -> factor (("+" | "-") factor)*
 
-factor -> unary (("*" | "/") unary)* 
+factor -> unary (("*" | "/" | "%") unary)* 
 
 unary -> ("-" | "!") unary | call
 

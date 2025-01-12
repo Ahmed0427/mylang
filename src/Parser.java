@@ -126,7 +126,25 @@ public class Parser {
         if (match(TokenType.IF)) return ifStmt(); 
         if (match(TokenType.WHILE)) return whileStmt(); 
         if (match(TokenType.FOR)) return forStmt(); 
+        if (match(TokenType.RETURN)) return returnStmt(); 
         return exprStmt();
+    }
+
+    StmtNode returnStmt() {
+        ExprNode expr = null;
+        Token keyword = advance();
+        if (!match(TokenType.SEMICOLON)) {
+            expr = expression();
+        }
+
+        if (!match(TokenType.SEMICOLON)) {
+            throw error(peek(), "Expect ';' after return statement.");
+        }
+
+        advance();
+        
+        return new ReturnStmt(keyword, expr);
+        
     }
 
     StmtNode forStmt() {
