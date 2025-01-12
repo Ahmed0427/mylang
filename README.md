@@ -120,6 +120,15 @@ for (let next = 1; current < 10000; next = previous + next) {
   current = next;
 }
 
+fun fib(n) {
+  if (n <= 1) return n;
+  return fib(n - 2) + fib(n - 1);
+}
+
+for (let i = 0; i < 20; i = i + 1) {
+  print fib(i);
+}
+
 // trying functions and return statement
 
 fun factorial(n) {
