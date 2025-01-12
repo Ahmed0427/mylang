@@ -5,8 +5,8 @@ class MyFunction implements MyCallable {
     private final Scope parentScope;
 
     MyFunction(FunDeclStmt funDecl, Scope parentScope) {
-        this.parentScope = parentScope;
         this.funDecl = funDecl;
+        this.parentScope = parentScope;
     }
 
     public int parametersCount() {
@@ -18,6 +18,7 @@ class MyFunction implements MyCallable {
 
         for (int i = 0; i < funDecl.parameters.size(); i++) {
             scope.namesMap.put(funDecl.parameters.get(i).lexeme, args.get(i));
+            scope.isConstMap.put(funDecl.parameters.get(i).lexeme, false);
         }
         
         try {

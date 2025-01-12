@@ -31,7 +31,9 @@ printStmt -> "print" expression ";"
 
 expression -> assignment
 
-assignment -> IDENTIFIER "=" assignment | ternary
+assignment -> IDENTIFIER "=" assignment | funExpr 
+
+funExpr -> "fun" "(" parameters? ")" block | ternary
 
 ternary -> logicOr ("?" ternary ":" ternary)? 
 

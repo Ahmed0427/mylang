@@ -158,6 +158,22 @@ let counter = makeCounter();
 counter(); // "1".
 counter(); // "2".
 
+// testing anonymous functions
+
+fun thrice(fn) {
+  for (let i = 1; i <= 3; i = i + 1) {
+    fn(i);
+  }
+}
+
+thrice(fun (a) {
+  print a;
+});
+
+// "1".
+// "2".
+// "3".
+
 ```
 
 ## Development

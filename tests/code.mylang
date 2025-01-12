@@ -1,14 +1,12 @@
-fun makeCounter() {
-  let i = 0;
-  fun count() {
-    i = i + 1;
-    print i;
+fun thrice(fn) {
+  for (let i = 1; i <= 3; i = i + 1) {
+    fn(i);
   }
-
-  return count;
 }
 
-let counter = makeCounter();
-counter(); // "1".
-counter(); // "2".
-
+thrice(fun (a) {
+  print a;
+});
+// "1".
+// "2".
+// "3".

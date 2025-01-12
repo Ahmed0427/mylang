@@ -308,7 +308,7 @@ public class Parser {
     }
 
     ExprNode assignment() {
-        ExprNode expr = ternary();
+        ExprNode expr = funExpr();
 
         if (match(TokenType.EQUAL)) {
             Token equals = advance();
@@ -323,6 +323,40 @@ public class Parser {
         }
 
         return expr;
+    }
+
+    ExprNode funExpr() {
+        if (match(TokenType.FUN)) {
+            Token fun = advance();
+            Token name = new Token(TokenType.IDENTIFIER, "anonymous", null, fun.line);
+            String kind = "anonymous function";
+
+            if (!match(TokenType.LEFT_PAREN)) {
+                throw error(peek(), "Expect ( " + kind + " name.");
+            }
+            advance();
+
+            List<Token> params = new ArrayList<>();
+            if (!match(TokenType.RIGHT_PAREN)) {
+                params = parameters();
+            }
+
+            if (!match(TokenType.RIGHT_PAREN)) {
+                throw error(peek(), "Expect ) after parameters");
+            }
+            advance();
+
+            if (!match(TokenType.LEFT_BRACE)) {
+                throw error(peek(), "Expect { after " + kind + " parameters");
+            }
+
+            StmtNode body = block();
+
+            return new FunExpr(name, params, body);
+        }
+        else {
+            return ternary();
+        }
     }
 
     ExprNode ternary() {
