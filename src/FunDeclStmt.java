@@ -17,7 +17,7 @@ class FunDeclStmt implements StmtNode {
             throw new EvaluationException(name, msg); 
         }
 
-        MyFunction function = new MyFunction(this);
+        MyFunction function = new MyFunction(this, Main.scope);
         Main.scope.namesMap.put(name.lexeme, function);
         Main.scope.isConstMap.put(name.lexeme, false);
     }

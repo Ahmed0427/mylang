@@ -142,6 +142,22 @@ fun factorial(n) {
 
 print factorial(5);  // Output: 120
 
+// testing closures
+
+fun makeCounter() {
+  let i = 0;
+  fun count() {
+    i = i + 1;
+    print i;
+  }
+
+  return count;
+}
+
+let counter = makeCounter();
+counter(); // "1".
+counter(); // "2".
+
 ```
 
 ## Development

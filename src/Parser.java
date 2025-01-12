@@ -35,10 +35,10 @@ public class Parser {
 
     StmtNode funDecl() {
         advance();
-        return function("function");
+        return functionStmt("function");
     }
 
-    StmtNode function(String kind) {
+    StmtNode functionStmt(String kind) {
         if (!match(TokenType.IDENTIFIER)) {
             throw error(peek(), "Expect " + kind + " name.");
         }

@@ -1,8 +1,14 @@
-fun fibonacci(n) {
-  if (n <= 1) return n;
-  return fibonacci(n - 2) + fibonacci(n - 1);
+fun makeCounter() {
+  let i = 0;
+  fun count() {
+    i = i + 1;
+    print i;
+  }
+
+  return count;
 }
 
-for (let i = 0; i < 20; i = i + 1) {
-  print fibonacci(i);
-}
+let counter = makeCounter();
+counter(); // "1".
+counter(); // "2".
+
