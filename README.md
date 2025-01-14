@@ -1,4 +1,4 @@
-# lightweight Scripting Language Interpreter
+# Scripting Language Interpreter
 A lightweight, scripting language interpreter written in Java.
 This project implements a dynamically-typed language
 with modern syntax features
