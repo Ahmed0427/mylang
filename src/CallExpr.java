@@ -15,12 +15,6 @@ class CallExpr implements ExprNode {
     public Object evaluate() {
         Object functionObj = calleeExpr.evaluate(); 
 
-        List<Object> arguments = new ArrayList<>();
-
-        for (ExprNode argument : args) { 
-            arguments.add(argument.evaluate());
-        }
-
         if (!(functionObj instanceof MyCallable)) {
             throw new EvaluationException(closingParen,
             "Can only call functions and classes.");
@@ -32,7 +26,13 @@ class CallExpr implements ExprNode {
         if (args.size() != function.parametersCount()) {
             throw new EvaluationException(closingParen, "Expected " +
                 function.parametersCount() + " arguments but got " +
-                arguments.size() + ".");
+                args.size() + ".");
+        }
+
+        List<Object> arguments = new ArrayList<>();
+
+        for (ExprNode argument : args) { 
+            arguments.add(argument.evaluate());
         }
 
         return function.call(arguments);

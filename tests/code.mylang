@@ -1,12 +1,9 @@
-fun thrice(fn) {
-  for (let i = 1; i <= 3; i = i + 1) {
-    fn(i);
-  }
+fun fib(n) {
+  if (n <= 1) return n;
+  return fib(n - 2) + fib(n - 1);
 }
 
-thrice(fun (a) {
-  print a;
-});
-// "1".
-// "2".
-// "3".
+for (let i = 0; i < 20; i = i + 1) {
+  print fib(i);
+}
+

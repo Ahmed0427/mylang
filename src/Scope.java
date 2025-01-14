@@ -25,7 +25,7 @@ class Scope {
             }
             
             throw new EvaluationException(name,
-                "Undefined variable '" + name.lexeme + "'.");
+                "'" + name.lexeme + "' is undefined.");
         }
 
         if (isConstMap.get(name.lexeme)) {
@@ -43,7 +43,7 @@ class Scope {
             }
             
             throw new EvaluationException(name,
-                "Undefined variable '" + name.lexeme + "'.");
+                "'" + name.lexeme + "' is undefined.");
         }
 
         if (namesMap.get(name.lexeme) == null) {

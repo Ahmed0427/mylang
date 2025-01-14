@@ -20,16 +20,18 @@ class MyFunction implements MyCallable {
             scope.namesMap.put(funDecl.parameters.get(i).lexeme, args.get(i));
             scope.isConstMap.put(funDecl.parameters.get(i).lexeme, false);
         }
+
+        Scope prevMainScope = Main.scope;
         
         try {
             Main.scope = scope;
             funDecl.body.evaluate();
         }
-        catch (ReturnVal val) {
-            return val.value;
+        catch (ReturnVal returnVal) {
+            return returnVal.value;
         }
         finally {
-            Main.scope = parentScope;
+            Main.scope = prevMainScope;
         }
 
         return null;
