@@ -1,31 +1,39 @@
 import java.util.List;
 
 class MyFunction implements MyCallable {
-    private final FunDeclStmt funDecl;
+    private final Token name;
+    private final List<Token> parameters;
+    private final StmtNode body;
     private final Scope parentScope;
 
-    MyFunction(FunDeclStmt funDecl, Scope parentScope) {
-        this.funDecl = funDecl;
+    MyFunction(Token name, List<Token> parameters,
+        StmtNode body, Scope parentScope) {
+
+        this.name = name;
+        this.parameters = parameters;
+        this.body = body;
         this.parentScope = parentScope;
+
     }
 
     public int parametersCount() {
-        return funDecl.parameters.size();
+        return parameters.size();
     }
+
 
     public Object call(List<Object> args) {
         Scope scope = new Scope(parentScope);
 
-        for (int i = 0; i < funDecl.parameters.size(); i++) {
-            scope.namesMap.put(funDecl.parameters.get(i).lexeme, args.get(i));
-            scope.isConstMap.put(funDecl.parameters.get(i).lexeme, false);
+        for (int i = 0; i < parameters.size(); i++) {
+            scope.namesMap.put(parameters.get(i).lexeme, args.get(i));
+            scope.isConstMap.put(parameters.get(i).lexeme, false);
         }
 
         Scope prevMainScope = Main.scope;
         
         try {
             Main.scope = scope;
-            funDecl.body.evaluate();
+            body.evaluate();
         }
         catch (ReturnVal returnVal) {
             return returnVal.value;
@@ -38,6 +46,6 @@ class MyFunction implements MyCallable {
     }
 
     public String toString() {
-        return "<Function: " + funDecl.name.lexeme + ">";
+        return "<Function: " + name.lexeme + ">";
     }
 }

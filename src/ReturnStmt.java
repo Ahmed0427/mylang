@@ -10,6 +10,6 @@ class ReturnStmt implements StmtNode {
     public void evaluate() {
         Object value = null;
         if (expr != null) value = expr.evaluate();
-        throw new ReturnVal(value);
+        throw new ReturnVal(value, keyword);
     }
 }

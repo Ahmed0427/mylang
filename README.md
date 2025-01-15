@@ -193,7 +193,7 @@ make run file=tests/your_test_file
 ```
 
 ## Contributing
-Contributions are not welcome! Please don't submit a Pull Request.
+Contributions are not welcome! Please don't submit a Pull Request. (Just kidding!)
 
 ## Acknowledgments
 - [Crafting Interpreters](https://craftinginterpreters.com/) by Robert Nystrom helped me a lot throw this project

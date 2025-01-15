@@ -17,8 +17,7 @@ class FunExpr implements ExprNode {
             throw new EvaluationException(name, msg); 
         }
 
-        FunDeclStmt funDecl = new FunDeclStmt(name, parameters, body);
-        MyFunction function = new MyFunction(funDecl, Main.scope);
+        MyFunction function = new MyFunction(name, parameters, body, Main.scope);
 
         return function;
     }

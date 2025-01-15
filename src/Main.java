@@ -85,8 +85,12 @@ public class Main {
                 stmt.evaluate();
             }
         }
-        catch(EvaluationException ex) {
+        catch (EvaluationException ex) {
             reportEvaluationError(ex);
+        }
+        catch (ReturnVal ex) {
+            String msg = "Uncorrect use of return statement";
+            reportEvaluationError(new EvaluationException(ex.keyword, msg));
         }
     }
 

@@ -180,20 +180,19 @@ public class Parser {
         }
         advance();
 
-        StmtNode body = statement();
+        StmtNode forStmt = statement();
 
         if (updateExpr != null) {
-            body = new BlockStmt(Arrays.asList(
-                body,
-                new ExprStmt(updateExpr) 
+            forStmt = new BlockStmt(Arrays.asList(
+                forStmt, new ExprStmt(updateExpr) 
             ));
         }
 
         if (condition == null) condition = new LiteralNode(true);
-        body = new WhileStmt(condition, body);
+        forStmt = new WhileStmt(condition, forStmt);
 
-        if (init != null) body = new BlockStmt(Arrays.asList(init, body));
-        return body; 
+        if (init != null) forStmt = new BlockStmt(Arrays.asList(init, forStmt));
+        return forStmt; 
     }
 
     StmtNode whileStmt() {
