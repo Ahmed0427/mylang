@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 class Tokenizer {
     private final String source;
@@ -84,22 +83,12 @@ class Tokenizer {
                 while (peek() != '\n' && !isAtEnd()) advance();
             }
             else if(match('*')) {
-                Stack<Integer> stack = new Stack<>();
-
-                stack.push(0);
-                while (!isAtEnd() && !stack.empty()) {
+                while (!isAtEnd()) {
                     if (peek() == '*' && peekNext() == '/') {
-                        stack.pop();
                         advance();
                     }
-                    else if (peek() == '/' && peekNext() == '*') {
-                        stack.push(0);
-                        advance();
-                    }
-
                     advance();
                 } 
-
             }
             else {
                 addToken(TokenType.SLASH);
