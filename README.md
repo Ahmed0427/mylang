@@ -39,13 +39,14 @@ with modern syntax features
 ### Prerequisites
 - Java Development Kit (JDK) 8 or higher
 - Makefile (for building)
+- I think you have to have any flavor of linux
 
 ### Building the Project
 Clone the repository and build using Make:
 
 ```bash
-git clone [repository-url]
-cd [project-name]
+git clone https://github.com/Ahmed0427/my-own-interpreter.git
+cd my-own-interpreter
 make compile
 ```
 
@@ -174,22 +175,6 @@ thrice(fun (a) {
 // "2".
 // "3".
 
-```
-
-## Development
-
-### Adding New Features
-1. Add the new grammar
-2. Add relevant token types in `TokenType.java`
-3. Implement new AST nodes if needed
-4. Update the parser to handle new syntax
-5. Add evaluation logic
-6. Add tests in the `tests/` directory
-
-## Testing
-Test programs are in `tests/` directory and run using:
-```bash
-make run file=tests/your_test_file
 ```
 
 ## Contributing
