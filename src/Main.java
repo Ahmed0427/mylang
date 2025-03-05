@@ -59,7 +59,44 @@ public class Main {
 
                 if (line == null || line.equals("exit")) break;
 
-                run(line);
+                Tokenizer tokenizer = new Tokenizer(line);
+                List<Token> tokens = tokenizer.scanTokens();
+
+                if (tokens.size() == 1) continue;
+                Token lastToken = tokens.get(tokens.size() - 2);
+                
+                int leftBraceCnt = 0;
+                int rightBraceCnt = 0;
+                for (Token token : tokens) {
+                    if (token.type == TokenType.RIGHT_BRACE) rightBraceCnt++; 
+                    if (token.type == TokenType.LEFT_BRACE) leftBraceCnt++; 
+                }
+
+                while (leftBraceCnt > rightBraceCnt ||
+                    (lastToken.type != TokenType.RIGHT_BRACE &&
+                    lastToken.type != TokenType.SEMICOLON)) {
+
+                    line = reader.readLine(">>> ");
+
+                    if (line == null || line.equals("exit")) return;
+
+                    Tokenizer contTokenizer = new Tokenizer(line);
+                    List<Token> contTokens = contTokenizer.scanTokens();
+
+                    for (Token token : contTokens) {
+                        if (token.type == TokenType.RIGHT_BRACE) rightBraceCnt++; 
+                        if (token.type == TokenType.LEFT_BRACE) leftBraceCnt++; 
+                    }
+
+                    tokens.remove(tokens.size() - 1);
+
+                    tokens.addAll(contTokens);
+
+                    lastToken = tokens.get(tokens.size() - 2);
+
+                }
+
+                parseAndEval(tokens);
 
                 isThereError = false;
                 isThereRuntimeError = false;
@@ -74,6 +111,10 @@ public class Main {
         Tokenizer tokenizer = new Tokenizer(source);
         List<Token> tokens = tokenizer.scanTokens();
 
+        parseAndEval(tokens);
+    }
+
+    private static void parseAndEval(List<Token> tokens) {
         Parser parser = new Parser(tokens);
         List<StmtNode> statements = parser.parse();
 
