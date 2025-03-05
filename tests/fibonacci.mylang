@@ -1,0 +1,21 @@
+// program to print the first 21 elements in the Fibonacci sequence
+
+let previous;
+let current = 0;
+
+for (let next = 1; current < 10000; next = previous + next) {
+  print current;
+  previous = current;
+  current = next;
+}
+
+// Recursive Fibonacci function
+
+fun fib(n) {
+  if (n <= 1) return n;
+  return fib(n - 2) + fib(n - 1);
+}
+
+for (let i = 0; i < 20; i = i + 1) {
+  print fib(i);
+}

@@ -1,0 +1,31 @@
+// Closures
+
+fun makeCounter() {
+  let i = 0;
+  fun count() {
+    i = i + 1;
+    print i;
+  }
+
+  return count;
+}
+
+let counter = makeCounter();
+counter(); // "1".
+counter(); // "2".
+
+// Anonymous functions
+
+fun thrice(fn) {
+  for (let i = 1; i <= 3; i = i + 1) {
+    fn(i);
+  }
+}
+
+thrice(fun (a) {
+  print a;
+});
+
+// "1".
+// "2".
+// "3".

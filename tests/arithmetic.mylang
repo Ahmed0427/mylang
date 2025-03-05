@@ -1,0 +1,10 @@
+// Arithmetic operations
+let sum = 10 + 5;
+let diff = 10 - 5;
+let prod = 10 * 5;
+let quot = 10 / 5;
+
+print sum;
+print diff;
+print prod;
+print quot;

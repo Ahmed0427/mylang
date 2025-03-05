@@ -1,0 +1,6 @@
+// Variables and constants
+let age = 25;
+const PI = 3.14159;
+
+print age;
+print PI;
