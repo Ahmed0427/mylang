@@ -1,6 +1,5 @@
-fun echo(n) {
-  print n;
-  return n;
+let f = fun() {
+    print f;
 }
 
-print echo(echo(1) + echo(2)) + echo(echo(4) + echo(5));
+f();

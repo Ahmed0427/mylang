@@ -111,10 +111,11 @@ public class Parser {
             throw error(peek(), "Const declaration must be initialized.");
         }
 
-        if (!match(TokenType.SEMICOLON)) {
+        if (!match(TokenType.SEMICOLON) && !(expr instanceof FunExpr)) {
             throw error(peek(), "Expect ; after expression.");
         }
-        advance();
+
+        if (!(expr instanceof FunExpr)) advance();
 
         return new VarDeclStmt(declType, name, expr);
             
