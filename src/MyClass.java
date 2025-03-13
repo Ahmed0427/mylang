@@ -1,10 +1,13 @@
 import java.util.List;
-
+import java.util.Map;
+ 
 class MyClass implements MyCallable {
     final String name;
+    Map<String, MyFunction> methods;
 
-    MyClass(String name) {
+    MyClass(String name, Map<String, MyFunction> methods) {
         this.name = name;
+        this.methods = methods;
     }
 
     public int parametersCount() {

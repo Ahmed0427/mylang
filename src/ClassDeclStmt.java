@@ -1,4 +1,6 @@
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 class ClassDeclStmt implements StmtNode {
     final Token name;
@@ -15,7 +17,16 @@ class ClassDeclStmt implements StmtNode {
             throw new EvaluationException(name, msg); 
         }
 
-        MyClass myClass = new MyClass(name.lexeme);
+        Map<String, MyFunction> callableMethods = new HashMap<>();
+        
+        for (FunDeclStmt method : methods) {
+            MyFunction met = new MyFunction(method.name,
+                method.parameters, method.body, Main.scope);
+            callableMethods.put(method.name.lexeme, met);
+        }
+        
+
+        MyClass myClass = new MyClass(name.lexeme, callableMethods);
         Main.scope.namesMap.put(name.lexeme, myClass);
         Main.scope.isConstMap.put(name.lexeme, false);
     }
