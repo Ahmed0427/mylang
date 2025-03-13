@@ -1,10 +1,12 @@
 program -> declaration* EOF
 
-declaration -> variable | funDecl | statement
+declaration -> classDecl | funDecl | variable | statement
+
+classDecl -> "class" IDENTIFIER "{" function* "}"
 
 funDecl -> "fun" function ";"
 
-function -> IDENTIFIER "(" parameters? ")" block ";"
+function -> IDENTIFIER "(" parameters? ")" block
  
 parameters -> IDENTIFIER ( "," IDENTIFIER )* ";"
  
@@ -51,7 +53,7 @@ factor -> unary (("*" | "/" | "%") unary)*
 
 unary -> ("-" | "!") unary | call
 
-call -> primary ( "(" args? ")" )*
+call -> primary ( "(" args? ")" | "." IDENTIFIER )*
 
 args -> expression ( "," expression )*
 

@@ -23,8 +23,9 @@ public class Parser {
 
     StmtNode declaration() {
         try {
-            if (match(TokenType.LET, TokenType.CONST)) return variable();
+            if (match(TokenType.CLASS)) return classDecl();
             if (match(TokenType.FUN)) return funDecl();
+            if (match(TokenType.LET, TokenType.CONST)) return variable();
             return statement();
         } 
         catch (RuntimeException  ex) {
@@ -33,12 +34,39 @@ public class Parser {
         }
     }
 
+    StmtNode classDecl() {
+        advance();
+        if (!match(TokenType.IDENTIFIER)) {
+            throw error(peek(), "Expect class name.");
+        }
+        Token name = advance();
+
+        if (!match(TokenType.LEFT_BRACE)) {
+            throw error(peek(), "Expect '{' after class name.");
+        }
+        advance();
+       
+        List<FunDeclStmt> methods = new ArrayList<>();
+
+        while (!match(TokenType.RIGHT_BRACE) && !isAtEnd()) {
+            methods.add(functionStmt("method"));
+        }
+        
+        if (!match(TokenType.RIGHT_BRACE)) {
+            throw error(peek(), "Expect '}' to close class block.");
+        }
+        advance();
+
+        return new ClassDeclStmt(name, methods);
+         
+    }
+
     StmtNode funDecl() {
         advance();
         return functionStmt("function");
     }
 
-    StmtNode functionStmt(String kind) {
+    FunDeclStmt functionStmt(String kind) {
         if (!match(TokenType.IDENTIFIER)) {
             throw error(peek(), "Expect " + kind + " name.");
         }
@@ -318,6 +346,9 @@ public class Parser {
                 Token name = ((VarNode)expr).name;
                 return new AssignNode(name, value);
             }
+            else if (expr instanceof DotExpr) {
+                return new DotAssignExpr((DotExpr)expr, value);
+            }
 
             error(equals, "Invalid assignment target."); 
         }
@@ -466,13 +497,27 @@ public class Parser {
 
     ExprNode call() {
         ExprNode expr = primary();
-        while (match(TokenType.LEFT_PAREN)) {
-            advance();
-            List<ExprNode> argsList = args();
-            if (!match(TokenType.RIGHT_PAREN)) {
-                throw error(peek(), "Expect ')' after call.");
+        while (true) {
+            if (match(TokenType.LEFT_PAREN)) {
+                advance();
+                List<ExprNode> argsList = args();
+                if (!match(TokenType.RIGHT_PAREN)) {
+                    throw error(peek(), "Expect ')' after call.");
+                }
+                expr = new CallExpr(expr, advance(), argsList);
             }
-            expr = new CallExpr(expr, advance(), argsList);
+            else if (match(TokenType.DOT)) {
+                advance();
+                if (!match(TokenType.IDENTIFIER)) {
+                    throw error(peek(), "Expect name after '.'.");
+                }
+                Token name = advance();
+                expr = new DotExpr(expr, name);
+            }
+            else {
+                break;
+            }
+
         }
         return expr;
     }

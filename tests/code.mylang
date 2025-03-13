@@ -1,5 +1,6 @@
-let f = fun() {
-    print f;
-}
+class Bagel {}
+let bagel = Bagel();
+print bagel; // Prints "Bagel instance".
+bagel.name = "ahmed";
+print bagel.name;
 
-f();
