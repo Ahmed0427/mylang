@@ -1,9 +1,12 @@
+class Thing {
+  getCallback() {
+    fun localFunction() {
+      print this;
+    }
 
-class Bacon {
-  eat() {
-    print "Crunch crunch crunch!";
+    return localFunction;
   }
 }
 
-Bacon().eat(); // Prints "Crunch crunch crunch!".
-
+let callback = Thing().getCallback();
+callback();

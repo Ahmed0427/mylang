@@ -154,13 +154,18 @@ thrice(fun (a) {
 // "2".
 // "3".
 
-class Bacon {
-  eat() {
-    print "Crunch crunch crunch!";
+class Thing {
+  getCallback() {
+    fun localFunction() {
+      print this;
+    }
+
+    return localFunction;
   }
 }
 
-Bacon().eat(); // Prints "Crunch crunch crunch!".
+let callback = Thing().getCallback();
+callback();
 
 ```
 

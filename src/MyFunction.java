@@ -45,6 +45,12 @@ class MyFunction implements MyCallable {
         return null;
     }
 
+    public MyFunction bind(MyInstance instance) {
+        Scope scope = new Scope(Main.scope);
+        scope.namesMap.put("this", instance);
+        return new MyFunction(name, parameters, body, scope);
+    }
+
     public String toString() {
         return "<Function: " + name.lexeme + ">";
     }

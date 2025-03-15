@@ -553,6 +553,10 @@ public class Parser {
             advance(); return new LiteralNode(null);
         } 
 
+        if (match(TokenType.THIS)) {
+            return new ThisNode(advance());
+        }
+
         if (match(TokenType.STRING, TokenType.NUMBER)) {
             return new LiteralNode(advance().literal);
         }

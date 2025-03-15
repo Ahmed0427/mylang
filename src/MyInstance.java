@@ -15,7 +15,7 @@ class MyInstance {
         }
 
         if (myClass.methods.containsKey(name.lexeme)) {
-            return myClass.methods.get(name.lexeme);
+            return myClass.methods.get(name.lexeme).bind(this);
         }
 
         throw new EvaluationException(name, 
