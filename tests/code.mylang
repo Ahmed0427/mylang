@@ -1,12 +1,8 @@
-class Thing {
-  getCallback() {
-    fun localFunction() {
-      print this;
-    }
-
-    return localFunction;
+class Foo {
+  init(bar) {
+      this.bar = bar;
   }
 }
 
-let callback = Thing().getCallback();
-callback();
+let foo = Foo("bar");
+print foo.bar;

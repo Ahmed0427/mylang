@@ -11,11 +11,18 @@ class MyClass implements MyCallable {
     }
 
     public int parametersCount() {
+        MyFunction initializer = methods.get("init");
+        if (initializer != null) return initializer.parametersCount();
         return 0;
     }
 
     public Object call(List<Object> args) {
         MyInstance instance = new MyInstance(this);
+        MyFunction initializer = methods.get("init");
+        if (initializer != null) {
+            initializer.bind(instance).call(args);
+        }
+
         return instance;
     }
 

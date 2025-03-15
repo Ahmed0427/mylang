@@ -154,6 +154,9 @@ thrice(fun (a) {
 // "2".
 // "3".
 
+
+// classes
+
 class Thing {
   getCallback() {
     fun localFunction() {
@@ -166,6 +169,15 @@ class Thing {
 
 let callback = Thing().getCallback();
 callback();
+
+class Foo {
+  init(bar) {
+      this.bar = bar;
+  }
+}
+
+let foo = Foo("bar");
+print foo.bar;
 
 ```
 
