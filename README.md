@@ -11,28 +11,7 @@ with modern syntax features
 - you can define functions
 - Built-in print statement
 - good enough error handling
-
-## Project Structure and Components
-```
-.
-├── libs/                  # External dependencies
-│   └── jline.jar          # JLine for better REPL experience
-├── src/                   # Source code
-│   ├── Main.java          # Entry point
-│   ├── Tokenizer.java     # Converts text into tokens 
-│   ├── Parser.java        # Converts tokens into AST
-│   ├── Scope/             # Variables Map and the Parent Scope
-│   ├── ExprNode/          # An interface defines evaluate function it is for *Node
-│   ├── StmtNode/          # An interface defines evaluate function it is for *Stmt
-│   ├── *Node/             # AST nodes that implements ExprNode
-│   ├── *Stmt/             # AST nodes that implements StmtNode
-│   ├── MyCallable/        # interface for stuff that can be called like functions
-│   ├── MyFunction/        # implements MyCallable interface
-│   └── ...               
-├── tests/                 # Test files
-│   └── ...                # Test programs
-└── Makefile               # Build automation
-```
+- It supports classes, but it doesn’t have inheritance.
 
 ## Getting Started
 
@@ -175,10 +154,18 @@ thrice(fun (a) {
 // "2".
 // "3".
 
+class Bacon {
+  eat() {
+    print "Crunch crunch crunch!";
+  }
+}
+
+Bacon().eat(); // Prints "Crunch crunch crunch!".
+
 ```
 
 ## Contributing
 Contributions are not welcome! Please don't submit a Pull Request. (Just kidding!)
 
 ## Acknowledgments
-- [Crafting Interpreters](https://craftinginterpreters.com/) by Robert Nystrom helped me a lot throw this project
+- [Crafting Interpreters](https://craftinginterpreters.com/) by Robert Nystrom was a huge help throughout this project.
