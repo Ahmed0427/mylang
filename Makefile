@@ -15,8 +15,5 @@ CLASSPATH = $(BINDIR):$(JLINE_JAR)
 compile: 
 	@$(JC) -d $(BINDIR) -cp $(CLASSPATH) $(SOURCES)
 
-run: compile
-	@$(JVM) -cp $(CLASSPATH) $(MAIN) $(if $(file), $(file))
-
 clean:
-	@rm -rf $(BINDIR)/*.class
+	@rm $(BINDIR)/*.class

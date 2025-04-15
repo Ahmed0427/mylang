@@ -34,13 +34,13 @@ make compile
 #### REPL Mode
 To start the interactive REPL:
 ```bash
-make run
+./mylang
 ```
 
 #### File Mode
 To run a specific source file:
 ```bash
-make run file=path/to/your/file.txt
+./mylang path/to/your/code.mylang
 ```
 
 ## Language Syntax
