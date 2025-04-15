@@ -1,0 +1,16 @@
+#! /usr/bin/env bash
+
+if [ "$#" -gt 1 ]; then
+  echo "Usage: mylang [file]"
+  echo
+  echo "Options:"
+  echo "  file           Path to a .mylang source file to run"
+  echo "                 If omitted, starts the interactive REPL"
+  echo
+  echo "Examples:"
+  echo "  ./mylang                      # Start the REPL"
+  echo "  ./mylang path/to/code.mylang  # Run a specific source file"
+  exit 1
+fi
+
+java -cp bin:libs/jline.jar Main $@
