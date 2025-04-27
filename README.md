@@ -1,17 +1,16 @@
-# Scripting Language Interpreter
-A lightweight, scripting language interpreter written in Java.
+# mylang
 This project implements a dynamically-typed language
-with modern syntax features
+with modern syntax features using java
 
 ## Features
 
 - variable declarations with `let` and `const`
 - Basic data types: numbers, strings, booleans, and `none` for nothing
-- Control flow if's and loops
+- Control flow ifs and loops
 - you can define functions
 - Built-in print statement
 - good enough error handling
-- It supports classes, but it doesn’t have inheritance.
+- It supports classes
 
 ## Getting Started
 
