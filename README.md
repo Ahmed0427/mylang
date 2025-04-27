@@ -23,8 +23,6 @@ with modern syntax features using java
 Clone the repository and build using Make:
 
 ```bash
-git clone https://github.com/Ahmed0427/my-own-interpreter.git
-cd my-own-interpreter
 make compile
 ```
 
