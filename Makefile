@@ -1,19 +1,19 @@
 JC = javac
 JVM = java
 
-SRCDIRS = src
-BINDIR = bin
-LIBDIR = libs
+SRC_DIR = src
+BIN_DIR = bin
+LIB_DIR = libs
 
 MAIN = Main 
 
-SOURCES = $(foreach DIR, $(SRCDIRS), $(wildcard $(DIR)/*.java))
+SOURCES = $(wildcard $(SRC_DIR)/*.java)
 
-JLINE_JAR = $(LIBDIR)/jline.jar
-CLASSPATH = $(BINDIR):$(JLINE_JAR)
+JLINE_JAR = $(LIB_DIR)/jline.jar
+CLASS_PATH = $(BIN_DIR):$(JLINE_JAR)
 
 compile: 
-	@$(JC) -d $(BINDIR) -cp $(CLASSPATH) $(SOURCES)
+	@$(JC) -d $(BIN_DIR) -cp $(CLASS_PATH) $(SOURCES)
 
 clean:
-	@rm $(BINDIR)/*.class
+	@rm -r $(BIN_DIR)
