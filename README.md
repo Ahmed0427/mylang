@@ -17,7 +17,7 @@ with modern syntax features using java
 
 ### Prerequisites
 
-- **Java Development Kit (JDK) **
+- Java Development Kit (JDK)
 
 ### Building the Project
 
