@@ -1,7 +1,7 @@
 // if statements
 
-let x = 0;
-let y = 0;
+let x = 6;
+let y = 7;
 
 if (x < 5 and y > 10) {
     print "x < 5 and y > 10";
