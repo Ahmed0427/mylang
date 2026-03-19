@@ -1,4 +1,5 @@
 # mylang
+
 This project implements a dynamically-typed language
 with modern syntax features using java
 
@@ -15,34 +16,42 @@ with modern syntax features using java
 ## Getting Started
 
 ### Prerequisites
-- Java Development Kit (JDK) 8 or higher
-- Makefile (for building)
-- I think you have to have any flavor of linux
+
+- **Java Development Kit (JDK) **
 
 ### Building the Project
-Clone the repository and build using Make:
+
+You don't need to install Maven. Use the provided wrapper to compile the project:
 
 ```bash
-make compile
+./mvnw clean compile
 ```
 
 ### Running the Interpreter
 
 #### REPL Mode
+
 To start the interactive REPL:
+
 ```bash
 ./mylang
 ```
 
 #### File Mode
+
 To run a specific source file:
+
 ```bash
-./mylang path/to/your/code.mylang
+./mylang examples/fibonacci.mylang
 ```
+
+note: `mylang` is a small bash wrapper that runs the project via `./mvnw`.
+If you are on Windows, run the command directly with `./mvnw`
 
 ## Language Syntax
 
 ### Basic Examples
+
 ```javascript
 // Variables and constants
 let age = 25;
@@ -59,7 +68,7 @@ let name = "Hello " + "World";
 
 let isTrue = 10 > 5;
 
-// if statments 
+// if statments
 
 let x = 0;
 let y = 0;
@@ -177,9 +186,3 @@ let foo = Foo("bar");
 print foo.bar;
 
 ```
-
-## Contributing
-Contributions are not welcome! Please don't submit a Pull Request. (Just kidding!)
-
-## Acknowledgments
-- [Crafting Interpreters](https://craftinginterpreters.com/) by Robert Nystrom was a huge help throughout this project.

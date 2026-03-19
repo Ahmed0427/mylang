@@ -13,4 +13,4 @@ if [ "$#" -gt 1 ]; then
   exit 1
 fi
 
-java -cp bin:libs/jline.jar Main $@
+./mvnw exec:java -Dexec.mainClass="com.github.ahmed0427.Main" -Dexec.args="$1" -q
